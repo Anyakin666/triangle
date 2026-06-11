@@ -17,4 +17,4 @@ function printNumberTriangle(n) {
 }
 
 module.exports = { printNumberTriangle };
-// господипомоги
+// господипомогииии
