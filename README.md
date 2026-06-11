@@ -1,3 +1,5 @@
+![Tests](https://github.com/Anyakin666/triangle/actions/workflows/test-and-push.yml/badge.svg)
+
 # triangle
 задание с числовым треугольником (взяла из курса по python на степике)
 Численный треугольник 2
