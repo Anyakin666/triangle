@@ -7,22 +7,33 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
           ref: source
+          fetch-depth: 0
+      
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      
+      - run: npm install
       - run: npm test
+      
       - name: Push to main
         if: success()
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git checkout main || git checkout --orphan main
+          
+          git checkout main 2>/dev/null || git checkout --orphan main
           git rm -rf . 2>/dev/null || true
-          cp package.json test.js task.md README.md . 2>/dev/null || true
+          
+          # Копируем нужные файлы из source ветки
+          git checkout source -- package.json test.js task.md README.md 2>/dev/null || true
+          
           git add .
-          git commit -m "Update from source" --allow-empty
+          git commit -m "Обновление из source (тесты пройдены)" --allow-empty
           git push origin main --force
