@@ -13,7 +13,7 @@ function printNumberTriangle(n) {
         result += '\n';
     }
     
-    return "";
+    return result;
 }
 
 module.exports = { printNumberTriangle };
